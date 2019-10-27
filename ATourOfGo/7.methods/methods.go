@@ -20,6 +20,10 @@ func (v *Vertex) Scale(f float64) {
 	v.Y = v.Y * f
 }
 
+func (v *Vertex) Abs2() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
 func (f MyFloat) Abs() float64 {
 	if f < 0 {
 		return float64(-f)
@@ -54,6 +58,15 @@ func main() {
 		Scale(&v, 10)
 		//Scale(v, 10) // compile error!
 		fmt.Println(Abs(v))
+	}
+
+	// Choosing a value or pointer receiver
+	fmt.Println("\n Choosing a value or pointer receiver")
+	{
+		v := &Vertex{3, 4}
+		fmt.Printf("Before scaling: %+v, Abs: %v\n", v, v.Abs2())
+		v.Scale(5)
+		fmt.Printf("After scaling: %+v, Abs: %v\n", v, v.Abs2())
 	}
 }
 
